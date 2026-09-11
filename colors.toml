@@ -1,0 +1,62 @@
+mode = "dark"
+
+# Exact palette sampled from user screenshot (Catppuccin Mocha / Lavender & Dusty Rose)
+accent = "#CBA6F7"
+focus_red = "#F38BA8"
+selection = "#45475A"
+selection_background = "#45475A"
+selection_foreground = "#CDD6F4"
+muted = "#6C7086"
+
+# Deep velvety slate surfaces (matching editor & files windows in screenshot)
+background = "#1E1E2E"
+dark_background = "#181825"
+darker_background = "#11111B"
+lighter_background = "#313244"
+
+# Crisp, luminous lavender-white typography
+foreground = "#CDD6F4"
+dark_foreground = "#7F849C"
+light_foreground = "#BAC2DE"
+bright_foreground = "#FFFFFF"
+cursor = "#F5E0DC"
+
+# Syntax accents sampled directly from the editor in screenshot
+red = "#F38BA8"
+green = "#A6E3A1"
+yellow = "#FAB387"
+blue = "#89B4FA"
+magenta = "#CBA6F7"
+cyan = "#89DCEB"
+orange = "#F9E2AF"
+brown = "#EBA0AC"
+
+# Bright highlights
+bright_red = "#FF8EAB"
+bright_green = "#B7F0B2"
+bright_yellow = "#FBE8BA"
+bright_blue = "#A6C8FF"
+bright_magenta = "#DFB8FF"
+bright_cyan = "#A6EDFB"
+
+# Active border from screenshot: Soft Lavender to Dusty Rose Pink 90deg
+hyprland_active_border = "rgba(BFA7DBff) rgba(C18FB1ff) 90deg"
+hyprland_inactive_border = "rgba(313244aa)"
+
+# Complete ANSI 16-color table for terminals
+color0 = "#313244"
+color1 = "#F38BA8"
+color2 = "#A6E3A1"
+color3 = "#FAB387"
+color4 = "#89B4FA"
+color5 = "#CBA6F7"
+color6 = "#89DCEB"
+color7 = "#CDD6F4"
+color8 = "#585B70"
+color9 = "#FF8EAB"
+color10 = "#B7F0B2"
+color11 = "#FBE8BA"
+color12 = "#A6C8FF"
+color13 = "#DFB8FF"
+color14 = "#A6EDFB"
+color15 = "#FFFFFF"
