@@ -11,7 +11,7 @@ An aesthetic, modern dark theme featuring deep velvet slate surfaces, soft paste
 - **Deep Velvet Slate**: `#1E1E2E` base with `0.90` opacity and blur across terminals and popups.
 - **Comfortable Typography**: Luminous lavender-white (`#CDD6F4`) for maximum readability and zero eye fatigue.
 - **Curated Wallpapers**: 3 high-resolution anime backgrounds included in `backgrounds/`.
-- **Discord / Vesktop Theme**: Complete Vencord theme matching Velvet Dusk with dynamic system font adaptation (`Maple Mono`) and compact sizing.
+- **Discord / Vesktop Theme**: Complete Vencord theme matching Velvet Dusk with soft lavender and dusty rose accents.
 
 ## 🎨 Palette
 
