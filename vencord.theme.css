@@ -1,0 +1,726 @@
+/**
+* @name Omarchy Velvet Dusk Vencord
+* @author @mush
+* @version 1.0.0
+* @description Deep velvet slate surfaces, soft lavender, and dusty rose Discord chrome
+**/
+
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@5.0.0/index.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@5.0.0/700.css");
+
+@font-face {
+  font-family: "Maple Mono";
+  src: local("Maple Mono"), local("MapleMono-Regular");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Maple Mono";
+  src: local("Maple Mono"), local("MapleMono-Bold");
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  /* Velvet Dusk semantic roles — synchronized with colors.toml. */
+  --vd-bg: #181825;
+  --vd-surface: #1E1E2E;
+  --vd-selection: #45475A;
+  --vd-muted: #6C7086;
+  --vd-fg: #CDD6F4;
+  --vd-bright: #FFFFFF;
+  --vd-accent: #CBA6F7;
+  --vd-positive: #A6E3A1;
+  --vd-warning: #FAB387;
+  --vd-danger: #F38BA8;
+  --vd-unread: #C18FB1;
+  --vd-cool: #89DCEB;
+
+  /* Exact ANSI aliases from Velvet Dusk colors.toml */
+  --color00: #313244;
+  --color01: #F38BA8;
+  --color02: #A6E3A1;
+  --color03: #FAB387;
+  --color04: #89B4FA;
+  --color05: #CBA6F7;
+  --color06: #89DCEB;
+  --color07: #CDD6F4;
+  --color08: #585B70;
+  --color09: #FF8EAB;
+  --color10: #B7F0B2;
+  --color11: #FBE8BA;
+  --color12: #A6C8FF;
+  --color13: #DFB8FF;
+  --color14: #A6EDFB;
+  --color15: #FFFFFF;
+
+  /* Soft rounded corners */
+  --eh-radius-sm: 8px;
+  --eh-radius-md: 12px;
+  --eh-radius-lg: 16px;
+
+  /* Item color mapping */
+  --item-surface-0: var(--vd-bg);
+  --item-surface-1: var(--vd-surface);
+  --item-surface-2: var(--vd-selection);
+  --item-surface-3: color-mix(in srgb, var(--vd-selection) 72%, var(--vd-surface));
+  --item-surface-4: var(--vd-muted);
+
+  --item-text: var(--vd-fg);
+  --item-text-muted: var(--vd-muted);
+  --item-text-contrast: var(--vd-bright);
+  --item-text-inverse: var(--vd-bg);
+
+  --item-accent: var(--vd-accent);
+  --item-accent-strong: var(--vd-bright);
+  --item-positive: var(--vd-positive);
+  --item-warning: var(--vd-warning);
+  --item-danger: var(--vd-danger);
+  --item-highlight: var(--color11);
+  --item-unread: var(--vd-unread);
+
+  --item-mention-glow-1: #BFA7DB;
+  --item-mention-glow-2: #C18FB1;
+  --item-mention-glow-3: #DFB8FF;
+
+  --item-message-text: var(--item-text);
+  --item-channel-name: var(--item-text-muted);
+  --item-channel-name-unread: var(--item-text);
+  --item-channel-name-selected: var(--item-text);
+  --item-username: var(--item-accent);
+  --item-mention-foreground: var(--item-text);
+  --item-mention-text: var(--item-text);
+
+  --item-border: color-mix(in srgb, var(--item-surface-4) 45%, transparent);
+  --item-accent-dim: color-mix(in srgb, var(--item-accent) 55%, var(--item-surface-1));
+
+  /* UI surfaces (bridge vars) */
+  --eh-0: var(--item-surface-0);
+  --eh-1: var(--item-surface-1);
+  --eh-2: var(--item-surface-2);
+  --eh-3: var(--item-surface-3);
+  --eh-4: var(--item-surface-4);
+  --eh-border: var(--item-border);
+  --eh-gap: 12px;
+
+  --eh-accent: var(--item-accent);
+  --eh-accent-strong: var(--item-accent-strong);
+  --eh-danger: var(--item-danger);
+  --eh-accent-dim: var(--item-accent-dim);
+
+  --font-primary: "Maple Mono", "gg sans", sans-serif;
+  --font-display: "Maple Mono", "gg sans", sans-serif;
+  --eh-letter-spacing: 0.25px;
+}
+
+:root,
+body,
+#app-mount {
+  --font-primary: "Maple Mono", "gg sans", sans-serif !important;
+  --font-display: "Maple Mono", "gg sans", sans-serif !important;
+  --font-code: "Maple Mono", monospace !important;
+  --font-headline: "Maple Mono", "gg sans", sans-serif !important;
+
+  /* Balanced compact font size (14px matches GTK 10pt / Discord compact) */
+  --vesktop-font-size: 14px;
+  --font-size-16: var(--vesktop-font-size) !important;
+  --font-size-14: calc(var(--vesktop-font-size) - 1px) !important;
+  --font-size-12: calc(var(--vesktop-font-size) - 2px) !important;
+  --custom-message-font-size-font-size: var(--vesktop-font-size) !important;
+}
+
+body,
+#app-mount,
+nav[class*="sidebar"] *,
+#channels *,
+[class*="sidebar_"] *,
+[class*="channels_"] *,
+[class*="containerDefault"] *,
+[class*="thread"] *,
+[class*="typeThread"] *,
+[class*="spine"] ~ *,
+[class*="spine_"] ~ *,
+[class*="messageContent"],
+[class*="markup"],
+[class*="username"],
+[class*="channelName"],
+[class*="name"],
+button,
+input,
+textarea {
+  font-family: var(--font-primary) !important;
+}
+
+/* Chat Messages & Usernames */
+[class*="messageContent"],
+[class*="markup"] {
+  font-size: var(--vesktop-font-size) !important;
+  line-height: 1.35 !important;
+}
+
+[class*="username"] {
+  font-size: var(--vesktop-font-size) !important;
+}
+
+/* Channel Sidebar & Categories */
+nav[class*="sidebar"],
+#channels,
+[class*="channels_"] {
+  --font-size-16: var(--vesktop-font-size) !important;
+  --font-size-14: calc(var(--vesktop-font-size) - 1px) !important;
+  --font-size-12: calc(var(--vesktop-font-size) - 2px) !important;
+  font-size: var(--vesktop-font-size) !important;
+}
+
+/* All channel list items, links, labels, and text */
+[data-list-item-id^="channels___"],
+[data-list-item-id^="channels___"] [class*="name"],
+[data-list-item-id^="channels___"] [class*="name"] *,
+[data-list-item-id^="channels___"] [class*="channelName"],
+[data-list-item-id^="channels___"] [class*="linkTop"],
+[data-list-item-id^="channels___"] a,
+[data-list-item-id^="channels___"] span,
+[data-list-item-id^="channels___"] div:not([class*="icon"]):not([class*="avatar"]),
+nav[class*="sidebar"] a,
+nav[class*="sidebar"] a *,
+nav[class*="sidebar"] [class*="link"],
+nav[class*="sidebar"] [class*="link"] *,
+nav[class*="sidebar"] [class*="mainContent"],
+nav[class*="sidebar"] [class*="mainContent"] *,
+#channels a,
+#channels a *,
+#channels [class*="link"] *,
+[class*="thread"],
+[class*="thread"] *,
+[class*="typeThread"],
+[class*="typeThread"] *,
+[class*="spine"] ~ *,
+[class*="spine"] + *,
+[class*="spine_"] ~ *,
+[class*="spine_"] + * {
+  font-size: var(--vesktop-font-size) !important;
+}
+
+/* Category headers ("Omarchy", "Other Topics", etc.) */
+[class*="containerDefault"] [class*="name"],
+[class*="containerDefault"] [class*="name"] *,
+[class*="categoryText"],
+[class*="categoryText"] * {
+  font-size: calc(var(--vesktop-font-size) - 1.5px) !important;
+}
+
+/* Channel badges & unread counters ("3 New", "NEW", etc.) */
+[data-list-item-id^="channels___"] [class*="badge"],
+[data-list-item-id^="channels___"] [class*="pill"],
+[data-list-item-id^="channels___"] [class*="text"],
+nav[class*="sidebar"] [class*="badge"],
+nav[class*="sidebar"] [class*="pill"] {
+  font-size: calc(var(--vesktop-font-size) - 2px) !important;
+}
+
+/* Top bar channel title & topic */
+[class*="title_"] [class*="name"],
+[class*="title_"] [class*="name"] *,
+[class*="title_"] [class*="topic"],
+[class*="title_"] [class*="topic"] * {
+  font-size: var(--vesktop-font-size) !important;
+}
+
+/* Member list & Direct Messages */
+[class*="member_"] [class*="name"],
+[class*="member_"] [class*="name"] *,
+[class*="member_"] [class*="username"],
+[class*="member_"] [class*="activityText"],
+[class*="interactive_"] [class*="name"],
+[class*="interactive_"] [class*="name"] * {
+  font-size: var(--vesktop-font-size) !important;
+}
+
+/* Chat text input */
+[class*="textArea_"],
+[class*="slateTextArea_"],
+[class*="placeholder_"],
+button,
+input,
+textarea {
+  font-size: var(--vesktop-font-size) !important;
+}
+
+code,
+pre,
+[class*="codeContainer"] {
+  font-size: calc(var(--vesktop-font-size) - 1px) !important;
+}
+
+[class*="timestamp"] {
+  font-size: calc(var(--vesktop-font-size) - 2px) !important;
+}
+
+
+.theme-dark,
+.theme-darker,
+.theme-midnight,
+.visual-refresh {
+  /* Backgrounds */
+  --background-primary: var(--item-surface-1) !important;
+  --background-secondary: var(--item-surface-0) !important;
+  --background-secondary-alt: var(--item-surface-1) !important;
+  --background-tertiary: var(--item-surface-0) !important;
+  --background-accent: var(--item-surface-2) !important;
+  --background-floating: var(--item-surface-2) !important;
+
+  --background-base-lowest: var(--item-surface-0) !important;
+  --background-base-lower: var(--item-surface-0) !important;
+  --background-base-low: var(--item-surface-1) !important;
+  --background-base-tertiary: var(--item-surface-0) !important;
+
+  --background-surface-high: var(--item-surface-2) !important;
+  --background-surface-higher: var(--item-surface-2) !important;
+  --background-surface-highest: var(--item-surface-3) !important;
+  --bg-surface-raised: var(--item-surface-2) !important;
+  --bg-surface-overlay: var(--item-surface-1) !important;
+  --bg-base-secondary: var(--item-surface-0) !important;
+  --bg-base-tertiary: var(--item-surface-0) !important;
+  --bg-overlay-2: var(--item-surface-2) !important;
+  --bg-overlay-3: var(--item-surface-3) !important;
+
+  /* Inputs, cards, and modal surfaces that do not always inherit base tokens. */
+  --chat-background: var(--item-surface-1) !important;
+  --home-background: var(--item-surface-0) !important;
+  --channeltextarea-background: var(--item-surface-1) !important;
+  --input-background: var(--item-surface-1) !important;
+  --modal-background: var(--item-surface-1) !important;
+  --modal-footer-background: var(--item-surface-0) !important;
+  --card-primary-bg: var(--item-surface-1) !important;
+  --card-secondary-bg: var(--item-surface-0) !important;
+  --profile-body-background-color: var(--item-surface-1) !important;
+  --scrollbar-auto-thumb: color-mix(in srgb, var(--item-text-muted) 55%, transparent) !important;
+  --scrollbar-auto-track: transparent !important;
+
+  /* Modifiers */
+  --background-modifier-accent: color-mix(in srgb, var(--item-surface-2) 28%, transparent) !important;
+  --background-modifier-hover: color-mix(in srgb, var(--item-surface-2) 45%, var(--item-surface-1)) !important;
+  --background-modifier-active: color-mix(in srgb, var(--item-surface-2) 65%, var(--item-surface-1)) !important;
+  --background-modifier-selected: color-mix(in srgb, var(--item-surface-2) 88%, var(--item-surface-1)) !important;
+  --background-message-hover: color-mix(in srgb, var(--item-surface-2) 32%, transparent) !important;
+  --background-mentioned: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--item-accent) 22%, var(--item-surface-1)) 0%,
+    var(--item-surface-1) 100%
+  ) !important;
+  --background-mentioned-hover: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--item-accent) 32%, var(--item-surface-1)) 0%,
+    var(--item-surface-1) 100%
+  ) !important;
+  --mention-background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--item-accent) 28%, var(--item-surface-1)) 0%,
+    var(--item-surface-1) 100%
+  ) !important;
+  --mention-foreground: var(--item-mention-foreground) !important;
+
+  /* Text */
+  --text-normal: var(--item-text) !important;
+  --text-muted: var(--item-text-muted) !important;
+  --text-primary: var(--item-text) !important;
+  --text-secondary: color-mix(in srgb, var(--item-text) 75%, var(--item-text-muted)) !important;
+  --header-primary: var(--item-text) !important;
+  --header-secondary: color-mix(in srgb, var(--item-text) 75%, var(--item-text-muted)) !important;
+  --interactive-normal: var(--item-text) !important;
+  --interactive-hover: var(--item-text-contrast) !important;
+  --interactive-active: var(--item-text-contrast) !important;
+  --interactive-muted: var(--item-text-muted) !important;
+
+  /* Channel list text */
+  --channels-default: var(--item-channel-name) !important;
+  --channels-default-muted: color-mix(in srgb, var(--item-channel-name) 55%, transparent) !important;
+  --channels-default-unread: var(--item-channel-name-unread) !important;
+
+  /* Accents */
+  --brand-500: var(--item-accent) !important;
+  --brand-560: color-mix(in srgb, var(--item-accent) 18%, var(--item-surface-1)) !important;
+  --text-link: var(--item-accent) !important;
+  --channel-icon: var(--item-accent) !important;
+  --focus-primary: var(--item-highlight) !important;
+  --input-border-focus: var(--item-highlight) !important;
+
+  /* Buttons */
+  --button-filled-brand-background: var(--item-accent) !important;
+  --button-filled-brand-background-hover: var(--color13) !important;
+  --button-filled-brand-text: var(--item-text-inverse) !important;
+
+  --button-positive-background: var(--item-positive) !important;
+  --button-positive-background-hover: var(--color10) !important;
+  --button-positive-text: var(--item-text-inverse) !important;
+
+  --button-secondary-background: var(--item-surface-2) !important;
+  --button-secondary-background-hover: var(--item-surface-3) !important;
+  --button-secondary-text: var(--item-text) !important;
+
+  --button-danger-background: var(--item-danger) !important;
+  --button-danger-background-hover: var(--color09) !important;
+  --button-danger-text: var(--item-text-inverse) !important;
+
+  /* Status */
+  --status-positive: var(--item-positive) !important;
+  --status-warning: var(--item-warning) !important;
+  --status-danger: var(--item-danger) !important;
+}
+
+body {
+  font-family: var(--font-primary) !important;
+  letter-spacing: var(--eh-letter-spacing);
+}
+
+/* Message authors and body copy — scoped to the timeline to avoid recoloring
+ * profile, settings, forum, and member-list surfaces that reuse these classes. */
+[id^="chat-messages-"] [class*="username"] {
+  color: var(--item-username) !important;
+  font-family: var(--font-primary) !important;
+}
+
+:is(.theme-dark, .theme-darker, .theme-midnight, .visual-refresh)
+  [id^="chat-messages-"]
+  :is([class*="messageContent"], [class*="markup"]) {
+  color: var(--item-message-text) !important;
+  font-family: var(--font-primary) !important;
+}
+
+/* Channel row accents */
+[data-list-item-id^="channels___"][aria-selected="true"] {
+  background-color: var(--background-modifier-selected) !important;
+  box-shadow: inset 3px 0 0 0 var(--item-accent) !important;
+  border-radius: var(--eh-radius-md) !important;
+}
+
+[data-list-item-id^="channels___"][aria-selected="true"],
+[data-list-item-id^="channels___"][aria-selected="true"] * {
+  color: var(--item-channel-name-selected) !important;
+  font-family: var(--font-primary) !important;
+}
+
+[data-list-item-id^="channels___"]:hover {
+  background-color: var(--background-modifier-hover) !important;
+  box-shadow: inset 3px 0 0 0 var(--item-accent-dim) !important;
+  border-radius: var(--eh-radius-md) !important;
+}
+
+/* Channel icon base */
+[data-list-item-id^="channels___"] svg,
+[data-list-item-id^="channels___"] svg path {
+  fill: var(--item-accent-dim) !important;
+  color: var(--item-accent-dim) !important;
+}
+
+/* Unread channel icon */
+[data-list-item-id^="channels___"][class*="modeUnread"] svg,
+[data-list-item-id^="channels___"][class*="modeUnread"] svg path,
+[class*="modeUnread"] [class*="icon__"],
+[class*="modeUnread"] [class*="icon__"] path {
+  fill: var(--item-accent) !important;
+  color: var(--item-accent) !important;
+}
+
+/* Channel name states */
+[data-list-item-id^="channels___"]:not([class*="modeUnread"]):not([aria-selected="true"]) [class*="name"] *,
+li[class*="containerDefault"]:not([class*="modeUnread"]):not([class*="selected"]):not([class*="modeSelected"]) [class*="name"] *,
+#channels [class*="name__"] {
+  color: var(--item-channel-name) !important;
+  font-family: var(--font-primary) !important;
+}
+
+[data-list-item-id^="channels___"][class*="modeUnread"] [class*="name"] *,
+li[class*="containerDefault"][class*="modeUnread"] [class*="name"] *,
+#channels [class*="modeUnread"] [class*="name__"] {
+  color: var(--item-channel-name-unread) !important;
+  font-family: var(--font-primary) !important;
+}
+
+#channels [class*="modeSelected"] [class*="name__"] {
+  color: var(--item-channel-name-selected) !important;
+  font-family: var(--font-primary) !important;
+}
+
+/* Message composer surface and focus ring. Discord does not consistently
+ * consume channeltextarea/input variables on the visual-refresh composer. */
+[class*="channelTextArea"] {
+  background: transparent !important;
+}
+
+[class*="channelTextArea"] [class*="scrollableContainer"] {
+  background: var(--item-surface-1) !important;
+  border-color: var(--item-border) !important;
+}
+
+[class*="channelTextArea"]:focus-within {
+  box-shadow: 0 0 0 1px var(--item-highlight) inset !important;
+  border-color: var(--item-highlight) !important;
+}
+
+[class*="channelTextArea"]:focus-within [class*="scrollableContainer"] {
+  box-shadow: none !important;
+  border-color: inherit !important;
+}
+
+/* Post style input padding */
+[class*="textAreaForPostCreation"] {
+  padding: 8px 10px !important;
+  box-sizing: border-box !important;
+}
+
+/* Post media button spacing — do not affect unrelated containers that share
+ * the same generated module. */
+[class*="textAreaForPostCreation"] [class*="container__94439"] {
+  margin-left: 8px !important;
+}
+
+/* Forum and thread cards sometimes bypass the standard card tokens. */
+:is(
+  [class*="forumPostMessage"],
+  [class*="forumPost"]:not([class*="forumPostControls"])
+) {
+  background: var(--item-surface-1) !important;
+  border: 1px solid var(--item-border) !important;
+  border-radius: var(--eh-radius-md) !important;
+}
+
+:is(
+  [class*="forumPostMessage"],
+  [class*="forumPost"]:not([class*="forumPostControls"])
+):hover {
+  background: var(--background-modifier-hover) !important;
+  border-color: color-mix(in srgb, var(--item-accent) 35%, transparent) !important;
+}
+
+/* Mention highlight */
+div[class*="mentioned"],
+li[class*="mentioned"] {
+  background: var(--background-mentioned) !important;
+  box-shadow: none !important;
+  border-left: 3px solid var(--item-accent) !important;
+  border-radius: var(--eh-radius-md) !important;
+  position: relative;
+}
+
+div[class*="mentioned"]:hover,
+li[class*="mentioned"]:hover {
+  background: var(--background-mentioned-hover) !important;
+}
+
+div[class*="mentioned"]::before,
+li[class*="mentioned"]::before {
+  content: none !important;
+}
+
+/* Replying highlight */
+div[class*="replying"],
+li[class*="replying"] {
+  background: var(--background-mentioned) !important;
+  box-shadow: none !important;
+  border-left: 3px solid var(--item-unread) !important;
+  border-radius: var(--eh-radius-md) !important;
+  position: relative;
+}
+
+div[class*="replying"]:hover,
+li[class*="replying"]:hover {
+  background: var(--background-mentioned-hover) !important;
+}
+
+div[class*="replying"]::before,
+li[class*="replying"]::before {
+  content: none !important;
+}
+
+/* Message hover rounding */
+[id^="chat-messages-"] [class*="messageListItem"]:hover,
+[id^="chat-messages-"] [class*="messageListItem"]:hover > [class*="message"],
+[id^="chat-messages-"] [class*="messageListItem"]:hover [class*="contents"] {
+  background: var(--background-modifier-hover) !important;
+  border-radius: var(--eh-radius-md) !important;
+}
+
+/* Unread indicators and badges */
+div[class*="unreadBar"],
+span[class*="unreadBar"],
+div[class*="unreadPill"],
+span[class*="unreadPill"],
+div[class*="numberBadge"],
+span[class*="numberBadge"],
+div[class*="textBadge"],
+span[class*="textBadge"],
+div[class*="unread"][class*="unreadImportant"] {
+  background-color: var(--item-unread) !important;
+  color: var(--item-surface-1) !important;
+}
+
+/* New messages bar — partial module names survive Discord hash rotations. */
+[class*="messagesWrapper"] > [class*="newMessagesBar"][class*="barBase"],
+[class*="messagesWrapper"] [class*="newMessagesBar"][class*="barBase"] {
+  background: color-mix(in srgb, var(--item-surface-0) 90%, var(--item-unread) 10%) !important;
+  border: 1px solid color-mix(in srgb, var(--item-unread) 35%, transparent) !important;
+  color: var(--item-text) !important;
+  border-radius: 999px !important;
+  padding: 6px 12px !important;
+  height: auto !important;
+  min-height: 28px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  box-shadow: none !important;
+}
+
+div#---new-messages-bar[class*="divider"] {
+  --divider-color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+}
+
+div#---new-messages-bar[class*="divider"][class*="hasContent"] {
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--item-unread) 35%, transparent) 20%,
+      color-mix(in srgb, var(--item-unread) 35%, transparent) 70%,
+      transparent 84%,
+      transparent 100%
+    ) !important;
+  border-radius: var(--eh-radius-lg) !important;
+  padding: 4px 54px 4px 10px !important;
+  margin: 14px 0 6px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+}
+
+div#---new-messages-bar[class*="divider"][class*="isUnread"] {
+  --divider-color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+}
+
+div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="content"] {
+  background: color-mix(in srgb, var(--item-surface-1) 82%, var(--item-unread) 18%) !important;
+  border: 1px solid color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+  color: var(--item-unread) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  font-weight: 600 !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPill"] {
+  background-image: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--item-mention-glow-1) 45%, var(--item-surface-1)) 0%,
+    color-mix(in srgb, var(--item-mention-glow-2) 40%, var(--item-surface-1)) 50%,
+    color-mix(in srgb, var(--item-mention-glow-3) 35%, var(--item-surface-1)) 100%
+  ) !important;
+  color: var(--item-mention-text) !important;
+  border: 1px solid color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+  border-radius: 999px !important;
+  padding: 0 8px !important;
+  height: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  font-size: 10px !important;
+  transform: translateY(1px) !important;
+  box-shadow: none !important;
+}
+
+div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPillCapStroke"] {
+  stroke: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+}
+
+div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPillCap"],
+div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPillCap"] path {
+  fill: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+  color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+  stroke: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+}
+
+div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPillCap"],
+div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPillCap"] * {
+  display: none !important;
+}
+
+/* Unread mentions footer pill */
+div[class*="unreadMentionsIndicatorBottom"] > div {
+  background: color-mix(in srgb, var(--item-surface-1) 82%, var(--item-unread) 18%) !important;
+  color: var(--item-unread) !important;
+  border: 1px solid color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+}
+
+/* Jump to present / new messages pill */
+button[class*="jumpToPresentBar"],
+div[class*="jumpToPresentBar"] {
+  background: color-mix(in srgb, var(--item-surface-1) 82%, var(--item-unread) 18%) !important;
+  border-color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+  color: var(--item-unread) !important;
+}
+
+/* Inline @mention pills */
+:is(.theme-dark, .theme-darker, .theme-midnight, .visual-refresh)
+  [id^="chat-messages-"]
+  :is([class*="messageContent"], [class*="markup"])
+  [class*="mention"] {
+  background-image: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--item-mention-glow-1) 45%, var(--item-surface-1)) 0%,
+    color-mix(in srgb, var(--item-mention-glow-2) 40%, var(--item-surface-1)) 50%,
+    color-mix(in srgb, var(--item-mention-glow-3) 35%, var(--item-surface-1)) 100%
+  ) !important;
+  color: var(--item-mention-text) !important;
+  border: 1px solid color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
+  box-shadow: none !important;
+  border-radius: 999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 1.4 !important;
+  padding: 0.12em 0.55em !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px !important;
+  vertical-align: baseline !important;
+  text-shadow: none !important;
+}
+
+:is(.theme-dark, .theme-darker, .theme-midnight, .visual-refresh)
+  [id^="chat-messages-"]
+  :is([class*="messageContent"], [class*="markup"])
+  [class*="mention"]:hover {
+  background-image: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--item-mention-glow-1) 55%, var(--item-surface-1)) 0%,
+    color-mix(in srgb, var(--item-mention-glow-2) 50%, var(--item-surface-1)) 50%,
+    color-mix(in srgb, var(--item-mention-glow-3) 45%, var(--item-surface-1)) 100%
+  ) !important;
+  border-color: color-mix(in srgb, var(--item-unread) 75%, transparent) !important;
+  box-shadow: none !important;
+}
+
+/* Thread/voice active indicators — scoped to voice/activity rows. */
+[class*="voiceUser"] span[class*="live"],
+[class*="voiceUser"] span[class*="live"] span,
+div[class*="activity"] span[class*="dot"] {
+  background-color: var(--item-positive) !important;
+  color: var(--item-text-inverse) !important;
+}
+
+/* Voice and stream routes: neutralize decorative chrome without painting over
+ * shared video, participant tiles, controls, or identity surfaces. */
+:is(.callContainer_cb9592, .callContainer__722ff, [class*="callContainer"]) {
+  --bg-overlay-1: color-mix(in srgb, var(--item-surface-0) 28%, transparent);
+  --bg-overlay-2: color-mix(in srgb, var(--item-surface-0) 36%, transparent);
+  --bg-overlay-3: color-mix(in srgb, var(--item-surface-0) 44%, transparent);
+}
+
+:is(.callContainer_cb9592, .callContainer__722ff, [class*="callContainer"])
+  :is(.gradientContainer_bfe55a, [class*="gradientContainer"]) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
