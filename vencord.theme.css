@@ -1,665 +1,682 @@
 /**
-* @name Omarchy Velvet Dusk Vencord
+* @name Velvet Dusk
 * @author @mush
-* @version 1.0.0
-* @description Deep velvet slate surfaces, soft lavender, and dusty rose Discord chrome
+* @version 1.1.0
+* @description Velvet Dusk theme for Discord - deep velvet slate surfaces, soft lavender, and dusty rose accents
+* @source https://omarchy.org/
 **/
 
-@import url("https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@5.0.0/index.css");
-@import url("https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@5.0.0/700.css");
-
-@font-face {
-  font-family: "Maple Mono";
-  src: local("Maple Mono"), local("MapleMono-Regular");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Maple Mono";
-  src: local("Maple Mono"), local("MapleMono-Bold");
-  font-weight: 700;
-  font-style: normal;
-}
-
 :root {
-  /* Velvet Dusk semantic roles — synchronized with colors.toml. */
-  --vd-bg: #181825;
-  --vd-surface: #1E1E2E;
-  --vd-selection: #45475A;
-  --vd-muted: #6C7086;
-  --vd-fg: #CDD6F4;
-  --vd-bright: #FFFFFF;
-  --vd-accent: #CBA6F7;
-  --vd-positive: #A6E3A1;
-  --vd-warning: #FAB387;
-  --vd-danger: #F38BA8;
-  --vd-unread: #C18FB1;
-  --vd-cool: #89DCEB;
+    /* Velvet Dusk Base16 Palette */
+    --base00: #181825; /* Dark background (Mantle) - sidebar, secondary surfaces */
+    --base01: #1E1E2E; /* Primary background (Base) - chat timeline */
+    --base02: #262738; /* Raised surface / cards / input background */
+    --base03: #313244; /* Surface 0 / subtle borders / inactive buttons */
+    --base04: #45475A; /* Surface 1 / borders / popout edges / muted icons */
+    --base05: #CDD6F4; /* Primary foreground text / luminous lavender-white */
+    --base06: #BAC2DE; /* Secondary text / subtext / channel names */
+    --base07: #FFFFFF; /* High contrast / active text / pure white headers */
+    --base08: #F38BA8; /* Red / danger / errors / DND status */
+    --base09: #FAB387; /* Peach / orange / idle / warning */
+    --base0A: #F9E2AF; /* Warm yellow / notices / highlights */
+    --base0B: #A6E3A1; /* Sage green / success / online status */
+    --base0C: #89DCEB; /* Sky cyan / info / code attrs */
+    --base0D: #CBA6F7; /* Soft lavender / primary brand accent / blurple */
+    --base0E: #DFB8FF; /* Bright lavender / hover accents / keywords */
+    --base0F: #C18FB1; /* Dusty rose / unread pill / server booster */
 
-  /* Exact ANSI aliases from Velvet Dusk colors.toml */
-  --color00: #313244;
-  --color01: #F38BA8;
-  --color02: #A6E3A1;
-  --color03: #FAB387;
-  --color04: #89B4FA;
-  --color05: #CBA6F7;
-  --color06: #89DCEB;
-  --color07: #CDD6F4;
-  --color08: #585B70;
-  --color09: #FF8EAB;
-  --color10: #B7F0B2;
-  --color11: #FBE8BA;
-  --color12: #A6C8FF;
-  --color13: #DFB8FF;
-  --color14: #A6EDFB;
-  --color15: #FFFFFF;
+    /* Semantic Velvet Dusk extensions */
+    --base-crust: #11111B; /* Deepest dark - guilds rail, lowest base */
+    --vd-accent: var(--base0D);
+    --vd-accent-bright: var(--base0E);
+    --vd-unread: var(--base0F);
+    --vd-rose: #C18FB1;
+    --vd-mention-glow-1: #BFA7DB;
+    --vd-mention-glow-2: #C18FB1;
+    --vd-mention-glow-3: #DFB8FF;
 
-  /* Soft rounded corners */
-  --eh-radius-sm: 8px;
-  --eh-radius-md: 12px;
-  --eh-radius-lg: 16px;
+    /* Typography */
+    --font: "Maple Mono", "gg sans", sans-serif;
+    --font-code: "Maple Mono", monospace;
+    --font-primary: var(--font);
+    --font-display: var(--font);
+    --font-heading: var(--font);
 
-  /* Item color mapping */
-  --item-surface-0: var(--vd-bg);
-  --item-surface-1: var(--vd-surface);
-  --item-surface-2: var(--vd-selection);
-  --item-surface-3: color-mix(in srgb, var(--vd-selection) 72%, var(--vd-surface));
-  --item-surface-4: var(--vd-muted);
-
-  --item-text: var(--vd-fg);
-  --item-text-muted: var(--vd-muted);
-  --item-text-contrast: var(--vd-bright);
-  --item-text-inverse: var(--vd-bg);
-
-  --item-accent: var(--vd-accent);
-  --item-accent-strong: var(--vd-bright);
-  --item-positive: var(--vd-positive);
-  --item-warning: var(--vd-warning);
-  --item-danger: var(--vd-danger);
-  --item-highlight: var(--color11);
-  --item-unread: var(--vd-unread);
-
-  --item-mention-glow-1: #BFA7DB;
-  --item-mention-glow-2: #C18FB1;
-  --item-mention-glow-3: #DFB8FF;
-
-  --item-message-text: var(--item-text);
-  --item-channel-name: var(--item-text-muted);
-  --item-channel-name-unread: var(--item-text);
-  --item-channel-name-selected: var(--item-text);
-  --item-username: var(--item-accent);
-  --item-mention-foreground: var(--item-text);
-  --item-mention-text: var(--item-text);
-
-  --item-border: color-mix(in srgb, var(--item-surface-4) 45%, transparent);
-  --item-accent-dim: color-mix(in srgb, var(--item-accent) 55%, var(--item-surface-1));
-
-  /* UI surfaces (bridge vars) */
-  --eh-0: var(--item-surface-0);
-  --eh-1: var(--item-surface-1);
-  --eh-2: var(--item-surface-2);
-  --eh-3: var(--item-surface-3);
-  --eh-4: var(--item-surface-4);
-  --eh-border: var(--item-border);
-  --eh-gap: 12px;
-
-  --eh-accent: var(--item-accent);
-  --eh-accent-strong: var(--item-accent-strong);
-  --eh-danger: var(--item-danger);
-  --eh-accent-dim: var(--item-accent-dim);
-
-  --font-primary: "Maple Mono", "gg sans", sans-serif;
-  --font-display: "Maple Mono", "gg sans", sans-serif;
-  --eh-letter-spacing: 0.25px;
+    --font-weight-light: 400;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
 }
 
-:root,
-body,
-#app-mount {
-  --font-primary: "Maple Mono", "gg sans", sans-serif !important;
-  --font-display: "Maple Mono", "gg sans", sans-serif !important;
-  --font-code: "Maple Mono", monospace !important;
-  --font-headline: "Maple Mono", "gg sans", sans-serif !important;
-
-  /* Balanced compact font size (14px matches GTK 10pt / Discord compact) */
-  --vesktop-font-size: 14px;
-  --font-size-16: var(--vesktop-font-size) !important;
-  --font-size-14: calc(var(--vesktop-font-size) - 1px) !important;
-  --font-size-12: calc(var(--vesktop-font-size) - 2px) !important;
-  --custom-message-font-size-font-size: var(--vesktop-font-size) !important;
-}
-
-body,
-#app-mount,
-nav[class*="sidebar"] *,
-#channels *,
-[class*="sidebar_"] *,
-[class*="channels_"] *,
-[class*="containerDefault"] *,
-[class*="thread"] *,
-[class*="typeThread"] *,
-[class*="spine"] ~ *,
-[class*="spine_"] ~ *,
-[class*="messageContent"],
-[class*="markup"],
-[class*="username"],
-[class*="channelName"],
-[class*="name"],
-button,
-input,
-textarea {
-  font-family: var(--font-primary) !important;
-}
-
-/* Chat Messages & Usernames */
-[class*="messageContent"],
-[class*="markup"] {
-  font-size: var(--vesktop-font-size) !important;
-  line-height: 1.35 !important;
-}
-
-[class*="username"] {
-  font-size: var(--vesktop-font-size) !important;
-}
-
-/* Channel Sidebar & Categories */
-nav[class*="sidebar"],
-#channels,
-[class*="channels_"] {
-  --font-size-16: var(--vesktop-font-size) !important;
-  --font-size-14: calc(var(--vesktop-font-size) - 1px) !important;
-  --font-size-12: calc(var(--vesktop-font-size) - 2px) !important;
-  font-size: var(--vesktop-font-size) !important;
-}
-
-/* All channel list items, links, labels, and text */
-[data-list-item-id^="channels___"],
-[data-list-item-id^="channels___"] [class*="name"],
-[data-list-item-id^="channels___"] [class*="name"] *,
-[data-list-item-id^="channels___"] [class*="channelName"],
-[data-list-item-id^="channels___"] [class*="linkTop"],
-[data-list-item-id^="channels___"] a,
-[data-list-item-id^="channels___"] span,
-[data-list-item-id^="channels___"] div:not([class*="icon"]):not([class*="avatar"]),
-nav[class*="sidebar"] a,
-nav[class*="sidebar"] a *,
-nav[class*="sidebar"] [class*="link"],
-nav[class*="sidebar"] [class*="link"] *,
-nav[class*="sidebar"] [class*="mainContent"],
-nav[class*="sidebar"] [class*="mainContent"] *,
-#channels a,
-#channels a *,
-#channels [class*="link"] *,
-[class*="thread"],
-[class*="thread"] *,
-[class*="typeThread"],
-[class*="typeThread"] *,
-[class*="spine"] ~ *,
-[class*="spine"] + *,
-[class*="spine_"] ~ *,
-[class*="spine_"] + * {
-  font-size: var(--vesktop-font-size) !important;
-}
-
-/* Category headers ("Omarchy", "Other Topics", etc.) */
-[class*="containerDefault"] [class*="name"],
-[class*="containerDefault"] [class*="name"] *,
-[class*="categoryText"],
-[class*="categoryText"] * {
-  font-size: calc(var(--vesktop-font-size) - 1.5px) !important;
-}
-
-/* Channel badges & unread counters ("3 New", "NEW", etc.) */
-[data-list-item-id^="channels___"] [class*="badge"],
-[data-list-item-id^="channels___"] [class*="pill"],
-[data-list-item-id^="channels___"] [class*="text"],
-nav[class*="sidebar"] [class*="badge"],
-nav[class*="sidebar"] [class*="pill"] {
-  font-size: calc(var(--vesktop-font-size) - 2px) !important;
-}
-
-/* Top bar channel title & topic */
-[class*="title_"] [class*="name"],
-[class*="title_"] [class*="name"] *,
-[class*="title_"] [class*="topic"],
-[class*="title_"] [class*="topic"] * {
-  font-size: var(--vesktop-font-size) !important;
-}
-
-/* Member list & Direct Messages */
-[class*="member_"] [class*="name"],
-[class*="member_"] [class*="name"] *,
-[class*="member_"] [class*="username"],
-[class*="member_"] [class*="activityText"],
-[class*="interactive_"] [class*="name"],
-[class*="interactive_"] [class*="name"] * {
-  font-size: var(--vesktop-font-size) !important;
-}
-
-/* Chat text input */
-[class*="textArea_"],
-[class*="slateTextArea_"],
-[class*="placeholder_"],
-button,
-input,
-textarea {
-  font-size: var(--vesktop-font-size) !important;
-}
-
-code,
-pre,
-[class*="codeContainer"] {
-  font-size: calc(var(--vesktop-font-size) - 1px) !important;
-}
-
-[class*="timestamp"] {
-  font-size: calc(var(--vesktop-font-size) - 2px) !important;
-}
-
-
+.theme-light,
 .theme-dark,
 .theme-darker,
 .theme-midnight,
 .visual-refresh {
-  /* Backgrounds */
-  --background-primary: var(--item-surface-1) !important;
-  --background-secondary: var(--item-surface-0) !important;
-  --background-secondary-alt: var(--item-surface-1) !important;
-  --background-tertiary: var(--item-surface-0) !important;
-  --background-accent: var(--item-surface-2) !important;
-  --background-floating: var(--item-surface-2) !important;
-
-  --background-base-lowest: var(--item-surface-0) !important;
-  --background-base-lower: var(--item-surface-0) !important;
-  --background-base-low: var(--item-surface-1) !important;
-  --background-base-tertiary: var(--item-surface-0) !important;
-
-  --background-surface-high: var(--item-surface-2) !important;
-  --background-surface-higher: var(--item-surface-2) !important;
-  --background-surface-highest: var(--item-surface-3) !important;
-  --bg-surface-raised: var(--item-surface-2) !important;
-  --bg-surface-overlay: var(--item-surface-1) !important;
-  --bg-base-secondary: var(--item-surface-0) !important;
-  --bg-base-tertiary: var(--item-surface-0) !important;
-  --bg-overlay-2: var(--item-surface-2) !important;
-  --bg-overlay-3: var(--item-surface-3) !important;
-
-  /* Inputs, cards, and modal surfaces that do not always inherit base tokens. */
-  --chat-background: var(--item-surface-1) !important;
-  --home-background: var(--item-surface-0) !important;
-  --channeltextarea-background: var(--item-surface-1) !important;
-  --input-background: var(--item-surface-1) !important;
-  --modal-background: var(--item-surface-1) !important;
-  --modal-footer-background: var(--item-surface-0) !important;
-  --card-primary-bg: var(--item-surface-1) !important;
-  --card-secondary-bg: var(--item-surface-0) !important;
-  --profile-body-background-color: var(--item-surface-1) !important;
-  --scrollbar-auto-thumb: color-mix(in srgb, var(--item-text-muted) 55%, transparent) !important;
-  --scrollbar-auto-track: transparent !important;
-
-  /* Modifiers */
-  --background-modifier-accent: color-mix(in srgb, var(--item-surface-2) 28%, transparent) !important;
-  --background-modifier-hover: color-mix(in srgb, var(--item-surface-2) 45%, var(--item-surface-1)) !important;
-  --background-modifier-active: color-mix(in srgb, var(--item-surface-2) 65%, var(--item-surface-1)) !important;
-  --background-modifier-selected: color-mix(in srgb, var(--item-surface-2) 88%, var(--item-surface-1)) !important;
-  --background-message-hover: color-mix(in srgb, var(--item-surface-2) 32%, transparent) !important;
-  --background-mentioned: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--item-accent) 22%, var(--item-surface-1)) 0%,
-    var(--item-surface-1) 100%
-  ) !important;
-  --background-mentioned-hover: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--item-accent) 32%, var(--item-surface-1)) 0%,
-    var(--item-surface-1) 100%
-  ) !important;
-  --mention-background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--item-accent) 28%, var(--item-surface-1)) 0%,
-    var(--item-surface-1) 100%
-  ) !important;
-  --mention-foreground: var(--item-mention-foreground) !important;
-
-  /* Text */
-  --text-normal: var(--item-text) !important;
-  --text-muted: var(--item-text-muted) !important;
-  --text-primary: var(--item-text) !important;
-  --text-secondary: color-mix(in srgb, var(--item-text) 75%, var(--item-text-muted)) !important;
-  --header-primary: var(--item-text) !important;
-  --header-secondary: color-mix(in srgb, var(--item-text) 75%, var(--item-text-muted)) !important;
-  --interactive-normal: var(--item-text) !important;
-  --interactive-hover: var(--item-text-contrast) !important;
-  --interactive-active: var(--item-text-contrast) !important;
-  --interactive-muted: var(--item-text-muted) !important;
-
-  /* Channel list text */
-  --channels-default: var(--item-channel-name) !important;
-  --channels-default-muted: color-mix(in srgb, var(--item-channel-name) 55%, transparent) !important;
-  --channels-default-unread: var(--item-channel-name-unread) !important;
-
-  /* Accents */
-  --brand-500: var(--item-accent) !important;
-  --brand-560: color-mix(in srgb, var(--item-accent) 18%, var(--item-surface-1)) !important;
-  --text-link: var(--item-accent) !important;
-  --channel-icon: var(--item-accent) !important;
-  --focus-primary: var(--item-highlight) !important;
-  --input-border-focus: var(--item-highlight) !important;
-
-  /* Buttons */
-  --button-filled-brand-background: var(--item-accent) !important;
-  --button-filled-brand-background-hover: var(--color13) !important;
-  --button-filled-brand-text: var(--item-text-inverse) !important;
-
-  --button-positive-background: var(--item-positive) !important;
-  --button-positive-background-hover: var(--color10) !important;
-  --button-positive-text: var(--item-text-inverse) !important;
-
-  --button-secondary-background: var(--item-surface-2) !important;
-  --button-secondary-background-hover: var(--item-surface-3) !important;
-  --button-secondary-text: var(--item-text) !important;
-
-  --button-danger-background: var(--item-danger) !important;
-  --button-danger-background-hover: var(--color09) !important;
-  --button-danger-text: var(--item-text-inverse) !important;
-
-  /* Status */
-  --status-positive: var(--item-positive) !important;
-  --status-warning: var(--item-warning) !important;
-  --status-danger: var(--item-danger) !important;
+    --activity-card-background: var(--base02) !important;
+    --background-accent: var(--base03) !important;
+    --background-floating: var(--base00) !important;
+    --background-mentioned-hover: rgba(203, 166, 247, 0.14) !important;
+    --background-mentioned: rgba(203, 166, 247, 0.08) !important;
+    --background-message-highlight: rgba(203, 166, 247, 0.16) !important;
+    --background-message-hover: rgba(69, 71, 90, 0.28) !important;
+    --background-mod-strong: var(--base03) !important;
+    --background-modifier-accent: rgba(69, 71, 90, 0.28) !important;
+    --background-modifier-active: rgba(69, 71, 90, 0.5) !important;
+    --background-modifier-hover: rgba(69, 71, 90, 0.3) !important;
+    --background-modifier-selected: rgba(203, 166, 247, 0.15) !important;
+    --background-primary: var(--base01) !important;
+    --background-secondary-alt: var(--base-crust) !important;
+    --background-secondary: var(--base00) !important;
+    --background-surface-highest: var(--base03) !important;
+    --background-surface-higher: var(--base03) !important;
+    --background-surface-high: var(--base02) !important;
+    --background-tertiary: var(--base-crust) !important;
+    --background-base-low: var(--base01) !important;
+    --background-base-lower: var(--base00) !important;
+    --background-base-lowest: var(--base-crust) !important;
+    --background-base-tertiary: var(--base-crust) !important;
+    --background-code: var(--base02) !important;
+    --background-mod-subtle: var(--base00) !important;
+    --bg-base-secondary: var(--base00) !important;
+    --bg-base-tertiary: var(--base-crust) !important;
+    --bg-brand: var(--base0D) !important;
+    --bg-mod-faint: var(--base00) !important;
+    --bg-overlay-2: var(--base02) !important;
+    --bg-overlay-3: var(--base03) !important;
+    --bg-overlay-color-inverse: var(--base03) !important;
+    --bg-surface-raised: var(--base02) !important;
+    --bg-surface-overlay: var(--base01) !important;
+    --black: var(--base-crust) !important;
+    --blurple-50: var(--base0D) !important;
+    --border-faint: rgba(69, 71, 90, 0.45) !important;
+    --border-subtle: rgba(69, 71, 90, 0.35) !important;
+    --brand-05a: rgba(203, 166, 247, 0.05) !important;
+    --brand-10a: rgba(203, 166, 247, 0.1) !important;
+    --brand-15a: rgba(203, 166, 247, 0.15) !important;
+    --brand-260: var(--base0D) !important;
+    --brand-360: var(--base0D) !important;
+    --brand-500: var(--base0D) !important;
+    --brand-560: var(--base0E) !important;
+    --button-danger-background: var(--base08) !important;
+    --button-danger-background-disabled: rgba(243, 139, 168, 0.4) !important;
+    --button-danger-background-hover: #FF8EAB !important;
+    --button-filled-brand-background: var(--base0D) !important;
+    --button-filled-brand-background-hover: var(--base0E) !important;
+    --button-filled-brand-text: var(--base-crust) !important;
+    --button-filled-brand-text-hover: var(--base-crust) !important;
+    --button-outline-positive-border: var(--base0B) !important;
+    --button-outline-danger-background-hover: var(--base08) !important;
+    --button-outline-danger-border-hover: var(--base08) !important;
+    --button-positive-background: var(--base0B) !important;
+    --button-positive-background-disabled: rgba(166, 227, 161, 0.4) !important;
+    --button-positive-background-hover: #B7F0B2 !important;
+    --button-positive-text: var(--base-crust) !important;
+    --button-secondary-background: var(--base02) !important;
+    --button-secondary-background-disabled: rgba(49, 50, 68, 0.4) !important;
+    --button-secondary-background-hover: var(--base03) !important;
+    --button-secondary-text: var(--base05) !important;
+    --card-primary-bg: var(--base02) !important;
+    --card-secondary-bg: var(--base00) !important;
+    --channel-icon: var(--base04) !important;
+    --channels-default: var(--base06) !important;
+    --channel-text-area-placeholder: var(--base04) !important;
+    --channeltextarea-background: var(--base02) !important;
+    --chat-background-default: var(--base01) !important;
+    --chat-background: var(--base01) !important;
+    --chat-text-muted: var(--base04) !important;
+    --checkbox-background-checked: var(--base0D) !important;
+    --checkbox-border-checked: var(--base0D) !important;
+    --checkbox-background-default: var(--base02) !important;
+    --checkbox-border-default: var(--base04) !important;
+    --control-brand-foreground-new: var(--base0D) !important;
+    --control-brand-foreground: var(--base0D) !important;
+    --control-text-primary-default: var(--base-crust) !important;
+    --control-background-primary-default: var(--base0D) !important;
+    --custom-notice-text: var(--base05) !important;
+    --custom-poll-style-vote-percentage: var(--base06) !important;
+    --deprecated-text-input-bg: var(--base02) !important;
+    --deprecated-text-input-border: var(--base04) !important;
+    --font-display: var(--font, "gg sans") !important;
+    --font-headline: var(--font, "gg sans") !important;
+    --font-primary: var(--font, "gg sans") !important;
+    --green-330: var(--base0B) !important;
+    --green-360: var(--base0B) !important;
+    --green-300: var(--base0B) !important;
+    --header-primary: var(--base07) !important;
+    --header-secondary: var(--base06) !important;
+    --home-background: var(--base00) !important;
+    --info-warning-foreground: var(--base09) !important;
+    --input-background: var(--base02) !important;
+    --input-border: var(--base04) !important;
+    --input-border-focus: var(--base0D) !important;
+    --input-placeholder-text: var(--base04) !important;
+    --interactive-active: var(--base07) !important;
+    --interactive-hover: var(--base07) !important;
+    --interactive-muted: var(--base04) !important;
+    --interactive-normal: var(--base06) !important;
+    --mention-background: rgba(203, 166, 247, 0.12) !important;
+    --mention-foreground: var(--base0D) !important;
+    --menu-item-danger-active-bg: var(--base08) !important;
+    --menu-item-danger-hover-bg: var(--base08) !important;
+    --menu-item-default-hover-bg: var(--base02) !important;
+    --message-reacted-background: rgba(203, 166, 247, 0.16) !important;
+    --message-reacted-text: var(--base0D) !important;
+    --modal-background: var(--base01) !important;
+    --modal-footer-background: var(--base00) !important;
+    --notice-background-positive: var(--base0B) !important;
+    --notice-text-positive: var(--base-crust) !important;
+    --notice-background-warning: var(--base09) !important;
+    --notice-text-warning: var(--base-crust) !important;
+    --notice-background-negative: var(--base08) !important;
+    --notice-text-negative: var(--base-crust) !important;
+    --opacity-blurple-24: rgba(203, 166, 247, 0.24) !important;
+    --plum-23: var(--base02) !important;
+    --polls-victor-fill: var(--base0B) !important;
+    --profile-gradient-button-color: var(--base02) !important;
+    --profile-body-background-color: var(--base01) !important;
+    --primary-130: var(--base05) !important;
+    --primary-300: var(--base05) !important;
+    --primary-500: var(--base02) !important;
+    --primary-600: var(--base00) !important;
+    --primary-630: var(--base01) !important;
+    --primary-660: var(--base00) !important;
+    --primary-700: var(--base01) !important;
+    --primary-800: var(--base-crust) !important;
+    --red-400: var(--base08) !important;
+    --red-460: var(--base08) !important;
+    --red-500: var(--base08) !important;
+    --red-630: var(--base08) !important;
+    --red: var(--base08) !important;
+    --redesign-input-control-selected: var(--base0D) !important;
+    --scrollbar-auto-thumb: rgba(108, 112, 134, 0.45) !important;
+    --scrollbar-auto-track: transparent !important;
+    --scrollbar-thin-thumb: rgba(108, 112, 134, 0.45) !important;
+    --scrollbar-thin-track: transparent !important;
+    --search-popout-option-fade: none;
+    --search-popout-option-non-text-color: var(--base06) !important;
+    --status-danger-background: var(--base08) !important;
+    --status-danger: var(--base08) !important;
+    --status-negative: var(--base08) !important;
+    --status-positive-background: var(--base0B) !important;
+    --status-positive-text: var(--base0B) !important;
+    --status-positive: var(--base0B) !important;
+    --status-success: var(--base0B) !important;
+    --status-warning-background: var(--base09) !important;
+    --status-warning: var(--base09) !important;
+    --teal-430: var(--base0C) !important;
+    --text-brand: var(--base0D) !important;
+    --text-default: var(--base05) !important;
+    --text-feedback-positive: var(--base0B) !important;
+    --text-feedback-negative: var(--base08) !important;
+    --text-feedback-warning: var(--base09) !important;
+    --text-feedback-success: var(--base0B) !important;
+    --text-link: var(--base0D) !important;
+    --text-muted: var(--base04) !important;
+    --text-negative: var(--base08) !important;
+    --text-normal: var(--base05) !important;
+    --text-positive: var(--base0B) !important;
+    --text-primary: var(--base07) !important;
+    --text-secondary: var(--base06) !important;
+    --text-tertiary: var(--base04) !important;
+    --text-warning: var(--base09) !important;
+    --textbox-markdown-syntax: var(--base0D) !important;
+    --theme-base-color: var(--base00) !important;
+    --user-profile-overlay-background: var(--base01) !important;
+    --white-100: var(--base05) !important;
+    --white-200: var(--base05) !important;
+    --white-500: var(--base05) !important;
+    --white: var(--base07) !important;
+    --yellow-360: var(--base0A) !important;
+    --yellow-300: var(--base0A) !important;
+    --__lottieIconColor: var(--base0D) !important;
 }
 
-body {
-  font-family: var(--font-primary) !important;
-  letter-spacing: var(--eh-letter-spacing);
+/* Set custom font for messages */
+.messageContent_c19a55,
+[class*="messageContent"] {
+    font-family: var(--font) !important;
+    font-weight: var(--font-weight-normal);
 }
 
-/* Message authors and body copy — scoped to the timeline to avoid recoloring
- * profile, settings, forum, and member-list surfaces that reuse these classes. */
-[id^="chat-messages-"] [class*="username"] {
-  color: var(--item-username) !important;
-  font-family: var(--font-primary) !important;
+/* Cleaned up Add Friend button */
+.addFriend__133bf {
+    background-color: var(--base02) !important;
+    color: var(--base06) !important;
+    border-radius: 8px !important;
+}
+.addFriend__133bf:hover {
+    background-color: var(--base03) !important;
+    color: var(--base0D) !important;
 }
 
-:is(.theme-dark, .theme-darker, .theme-midnight, .visual-refresh)
-  [id^="chat-messages-"]
-  :is([class*="messageContent"], [class*="markup"]) {
-  color: var(--item-message-text) !important;
-  font-family: var(--font-primary) !important;
+/* Fix voice channel USRBG backgrounds */
+div[class^="background_"] {
+    background-color: transparent !important;
 }
 
-/* Channel row accents */
+/*--- Default Color Swap ---*/
+path[fill^="currentColor"],
+svg[fill^="currentColor"],
+rect[fill^="currentColor"] {
+    fill: var(--base06) !important;
+}
+
+/*--- Selected Text Recolor ---*/
+::selection {
+    color: var(--base07);
+    background: var(--base04);
+}
+
+/*--- Mention Interactive Hover Color ---*/
+.mention.interactive:hover {
+    background-color: rgba(203, 166, 247, 0.25) !important;
+}
+
+/*--- Default Folder Color Recolor ---*/
+.default__459fb {
+    background-color: var(--base02) !important;
+}
+
+/*--- Discord Icon (Top Left/Home) Recolor ---*/
+.childWrapper__6e9f8 {
+    background-color: var(--base02) !important;
+    color: var(--base0D) !important;
+}
+.childWrapper__6e9f8 svg path {
+    fill: var(--base0D) !important;
+}
+
+/*--- Close Icon Path Recolor ---*/
+svg[class^="closeIcon__"] path {
+    fill: var(--base04) !important;
+}
+
+/*--- Listen Along Invite Recolor ---*/
+.invite__4d3fa {
+    background: var(--base02) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 10px !important;
+}
+
+/*--- Activity Card Background Recolor ---*/
+.card__73069 {
+    background-color: var(--base02) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 10px !important;
+}
+
+div[class^="bar__"] {
+    background-color: var(--base02) !important;
+    border-color: var(--border-subtle) !important;
+}
+
+/*--- Voice Bar Text Recolor ---*/
+.barText__7aaec {
+    color: var(--base0B) !important;
+}
+.unreadIcon__7aaec {
+    color: var(--base0B) !important;
+}
+
+/*--- Mentions Bar Text Recolor ---*/
+.mentionsBar__7aaec .barText__7aaec {
+    color: var(--base0D) !important;
+}
+
+/*--- Forum Background Recolor ---*/
+.container_f369db {
+    background-color: var(--base01) !important;
+}
+
+/*--- Sidebar Icon Recolor ---*/
+.circleIconButton__5bc7e {
+    color: var(--base06) !important;
+}
+.circleIconButton__5bc7e:hover,
+.circleIconButton__5bc7e[class*="selected__"] {
+    color: var(--base0D) !important;
+    background-color: var(--base02) !important;
+}
+
+/*--- Summaries Tag Icon Recolor ---*/
+.summariesBetaTag_cf58b5 {
+    color: var(--base04) !important;
+}
+
+/*--- Folder Icon Recolor ---*/
+div.folderIconWrapper__48112 {
+    background-color: var(--base01) !important;
+}
+
+/*--- Unread Message Badge Text Color ---*/
+.numberBadge__2b1f5,
+.textBadge__2b1f5 {
+    background-color: var(--base0F) !important;
+    color: var(--base-crust) !important;
+    font-weight: 700 !important;
+}
+
+/*--- Typing Indicator Recolor ---*/
+.dots__5ad89 {
+    color: var(--base0D) !important;
+}
+
+/*--- Other Voice Channel Background Recolor ---*/
+.iconBadge__650eb {
+    background-color: var(--base03) !important;
+}
+
+/*--- Server Booster Icon Recolor ---*/
+.premiumIcon__5d473 {
+    color: var(--base0F) !important;
+}
+
+/*--- Server Boost Progress Bar Recolor ---*/
+.progress__0d0f9 {
+    background: linear-gradient(90deg, var(--base0D), var(--base0F)) !important;
+}
+
+/*--- Call Container Recolor ---*/
+.callContainer_cb9592,
+[class*="callContainer"] {
+    background-color: var(--base-crust) !important;
+}
+.gradientContainer_bfe55a,
+[class*="gradientContainer"] {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+
+/*--- Store Gradient Recolors ---*/
+.gradient_e9ef78 {
+    background: var(--base01) !important;
+}
+.bannerGradient__955a3 {
+    background: var(--base00) !important;
+}
+
+/*--- Button Text Recolor ---*/
+.lookFilled__201d5.colorGreen__201d5,
+.lookFilled__201d5.colorRed__201d5 {
+    color: var(--base-crust) !important;
+    font-weight: 600 !important;
+}
+
+/*--- Remove Folder Group Borders ---*/
+.folderGroupBackground__48112 {
+    border: none !important;
+    background-color: rgba(24, 24, 37, 0.6) !important;
+}
+
+/*--- Increase Text Legibility ---*/
+* {
+    text-rendering: optimizeLegibility !important;
+}
+
+/*--- Codeblock Syntax Highlighting Recolor (Velvet Dusk Syntax) ---*/
+.hljs-ansi-foreground-red {
+    color: var(--base08) !important;
+}
+.hljs-ansi-foreground-green {
+    color: var(--base0B) !important;
+}
+.hljs-ansi-foreground-yellow {
+    color: var(--base09) !important;
+}
+.hljs-ansi-foreground-blue {
+    color: #89B4FA !important;
+}
+.hljs-ansi-foreground-magenta {
+    color: var(--base0D) !important;
+}
+.hljs-attr {
+    color: var(--base0C) !important;
+}
+.hljs-attribute {
+    color: var(--base0C) !important;
+}
+.hljs-number {
+    color: var(--base09) !important;
+}
+.hljs-selector-class {
+    color: var(--base0D) !important;
+}
+.hljs-comment {
+    color: var(--base04) !important;
+    font-style: italic !important;
+}
+.hljs-subst {
+    color: var(--base05) !important;
+}
+.hljs-selector-pseudo {
+    color: var(--base0B) !important;
+}
+.hljs-section {
+    color: var(--base0D) !important;
+}
+.hljs-keyword {
+    color: var(--base0E) !important;
+    font-weight: 600 !important;
+}
+.hljs-variable {
+    color: var(--base08) !important;
+}
+.hljs-meta {
+    color: var(--base04) !important;
+}
+.hljs-built_in {
+    color: #89B4FA !important;
+}
+.hljs-string {
+    color: var(--base0B) !important;
+}
+.hljs-title {
+    color: var(--base0D) !important;
+}
+
+/*--- Visual Refresh Recolor & Modern Overrides ---*/
+.visual-refresh {
+    div[class^="autocomplete__"] {
+        background-color: var(--base00) !important;
+        border: 1px solid var(--border-subtle) !important;
+        border-radius: 12px !important;
+    }
+    path[fill^="rgba(88, 101, 242, 1)"] {
+        fill: var(--base0D) !important;
+    }
+    div[class^="topicsPillContainer"] {
+        --bg-overlay-2: var(--base02) !important;
+    }
+    .tagPill__9a337 {
+        background-color: var(--base02) !important;
+        color: var(--base0D) !important;
+    }
+    .bg__960e4 {
+        background: var(--base-crust) !important;
+    }
+    .wrapper_ef3116 {
+        background-color: var(--base-crust) !important;
+    }
+    .sidebar_c48ade {
+        background-color: var(--base00) !important;
+    }
+    .searchBar__97492 {
+        background-color: var(--base02) !important;
+        border-radius: 8px !important;
+    }
+    .channelTextArea_f75fb0 {
+        background: var(--base02) !important;
+        border: 1px solid var(--border-faint) !important;
+        border-radius: 12px !important;
+    }
+    .chatContent_f75fb0 {
+        background-color: var(--base01) !important;
+    }
+    .members_c8ffbb,
+    .member_c8ffbb {
+        background: var(--base00) !important;
+    }
+    .voiceBar__7aaec {
+        background-color: var(--base02) !important;
+    }
+    button.button__67645.redGlow__67645,
+    span.button__67645.redGlow__67645 {
+        background-color: var(--base02) !important;
+    }
+
+    .experimentButton_e131a9.buttonColor_e131a9.buttonActive_e131a9 {
+        background-color: var(--base0D) !important;
+        color: var(--base-crust) !important;
+    }
+
+    .selectedBackground_e681d1 {
+        background-color: var(--base02) !important;
+    }
+
+    /*--- Status Icon Recolor (DO NOT DISTURB) ---*/
+    svg[fill^="#d83a42"],
+    rect[fill^="#d83a42"],
+    path[fill^="#d83a42"],
+    svg[fill^="#d83a41"],
+    rect[fill^="#d83a41"],
+    path[fill^="#d83a41"] {
+        fill: var(--status-danger) !important;
+    }
+    /*--- Status Icon Recolor (IDLE) ---*/
+    svg[fill^="#ca9654"],
+    rect[fill^="#ca9654"],
+    path[fill^="#ca9654"],
+    svg[fill^="#cc954c"],
+    rect[fill^="#cc954c"],
+    path[fill^="#cc954c"] {
+        fill: var(--status-warning) !important;
+    }
+    /*--- Status Icon Recolor (ONLINE) ---*/
+    path[fill^="#43a25a"],
+    svg[fill^="#43a25a"],
+    rect[fill^="#43a25a"],
+    path[fill^="#40a258"],
+    svg[fill^="#40a258"],
+    rect[fill^="#40a258"] {
+        fill: var(--status-positive) !important;
+    }
+    /*--- Status Icon Recolor (OFFLINE) ---*/
+    svg[fill^="#83838b"],
+    rect[fill^="#83838b"],
+    path[fill^="#83838b"],
+    svg[fill^="#82838b"],
+    rect[fill^="#82838b"],
+    path[fill^="#82838b"] {
+        fill: var(--base04) !important;
+    }
+}
+
+/*--- Light Theme Fix ---*/
+.theme-light {
+    --base01: color-mix(in srgb, var(--base00) 95%, black) !important;
+    --base02: color-mix(in srgb, var(--base00) 85%, black) !important;
+    --base03: color-mix(in srgb, var(--base00) 80%, black) !important;
+    --base04: color-mix(in srgb, var(--base00) 70%, black) !important;
+    --base06: color-mix(in srgb, var(--base05) 95%, white) !important;
+    --base07: color-mix(in srgb, var(--base05) 90%, white) !important;
+}
+
+/*--- Fix letter-spacing on headers/titles ---*/
+.fieldTitle__1fed1,
+.item_aa8da2,
+.name__2ea32,
+.name__20a53,
+.label_c1e9c4,
+.headerText__99e7c,
+.header__56fec,
+.placeholder-cu2f9,
+.resultsGroup__56fec,
+.eyebrow_cf4812,
+.title_b6c092 {
+    letter-spacing: -0.2px;
+}
+
+/*=============================================================================
+ * VELVET DUSK VISUAL ENHANCEMENTS
+ * Signature Lavender & Dusty Rose chrome, refined channels, and sleek pills
+ *============================================================================*/
+
+/* Channel sidebar list items */
 [data-list-item-id^="channels___"][aria-selected="true"] {
-  background-color: var(--background-modifier-selected) !important;
-  box-shadow: inset 3px 0 0 0 var(--item-accent) !important;
-  border-radius: var(--eh-radius-md) !important;
+    background-color: rgba(203, 166, 247, 0.14) !important;
+    box-shadow: none !important;
+    border-radius: 8px !important;
 }
 
 [data-list-item-id^="channels___"][aria-selected="true"],
 [data-list-item-id^="channels___"][aria-selected="true"] * {
-  color: var(--item-channel-name-selected) !important;
-  font-family: var(--font-primary) !important;
+    color: var(--base07) !important;
 }
 
 [data-list-item-id^="channels___"]:hover {
-  background-color: var(--background-modifier-hover) !important;
-  box-shadow: inset 3px 0 0 0 var(--item-accent-dim) !important;
-  border-radius: var(--eh-radius-md) !important;
+    background-color: rgba(69, 71, 90, 0.3) !important;
+    box-shadow: none !important;
+    border-radius: 8px !important;
 }
 
 /* Channel icon base */
 [data-list-item-id^="channels___"] svg,
 [data-list-item-id^="channels___"] svg path {
-  fill: var(--item-accent-dim) !important;
-  color: var(--item-accent-dim) !important;
+    fill: var(--base04) !important;
+    color: var(--base04) !important;
 }
 
-/* Unread channel icon */
+/* Unread channel state */
+[data-list-item-id^="channels___"][class*="modeUnread"] [class*="name"] *,
+li[class*="containerDefault"][class*="modeUnread"] [class*="name"] * {
+    color: var(--base07) !important;
+    font-weight: 600 !important;
+}
+
 [data-list-item-id^="channels___"][class*="modeUnread"] svg,
 [data-list-item-id^="channels___"][class*="modeUnread"] svg path,
 [class*="modeUnread"] [class*="icon__"],
 [class*="modeUnread"] [class*="icon__"] path {
-  fill: var(--item-accent) !important;
-  color: var(--item-accent) !important;
+    fill: var(--base0D) !important;
+    color: var(--base0D) !important;
 }
 
-/* Channel name states */
-[data-list-item-id^="channels___"]:not([class*="modeUnread"]):not([aria-selected="true"]) [class*="name"] *,
-li[class*="containerDefault"]:not([class*="modeUnread"]):not([class*="selected"]):not([class*="modeSelected"]) [class*="name"] *,
-#channels [class*="name__"] {
-  color: var(--item-channel-name) !important;
-  font-family: var(--font-primary) !important;
+/* Message hover rounding */
+[id^="chat-messages-"] [class*="messageListItem"]:hover {
+    background: rgba(49, 50, 68, 0.25) !important;
+    border-radius: 8px !important;
 }
 
-[data-list-item-id^="channels___"][class*="modeUnread"] [class*="name"] *,
-li[class*="containerDefault"][class*="modeUnread"] [class*="name"] *,
-#channels [class*="modeUnread"] [class*="name__"] {
-  color: var(--item-channel-name-unread) !important;
-  font-family: var(--font-primary) !important;
-}
-
-#channels [class*="modeSelected"] [class*="name__"] {
-  color: var(--item-channel-name-selected) !important;
-  font-family: var(--font-primary) !important;
-}
-
-/* Message composer surface and focus ring. Discord does not consistently
- * consume channeltextarea/input variables on the visual-refresh composer. */
-[class*="channelTextArea"] {
-  background: transparent !important;
-}
-
-[class*="channelTextArea"] [class*="scrollableContainer"] {
-  background: var(--item-surface-1) !important;
-  border-color: var(--item-border) !important;
-}
-
-[class*="channelTextArea"]:focus-within {
-  box-shadow: 0 0 0 1px var(--item-highlight) inset !important;
-  border-color: var(--item-highlight) !important;
-}
-
-[class*="channelTextArea"]:focus-within [class*="scrollableContainer"] {
-  box-shadow: none !important;
-  border-color: inherit !important;
-}
-
-/* Post style input padding */
-[class*="textAreaForPostCreation"] {
-  padding: 8px 10px !important;
-  box-sizing: border-box !important;
-}
-
-/* Post media button spacing — do not affect unrelated containers that share
- * the same generated module. */
-[class*="textAreaForPostCreation"] [class*="container__94439"] {
-  margin-left: 8px !important;
-}
-
-/* Forum and thread cards sometimes bypass the standard card tokens. */
-:is(
-  [class*="forumPostMessage"],
-  [class*="forumPost"]:not([class*="forumPostControls"])
-) {
-  background: var(--item-surface-1) !important;
-  border: 1px solid var(--item-border) !important;
-  border-radius: var(--eh-radius-md) !important;
-}
-
-:is(
-  [class*="forumPostMessage"],
-  [class*="forumPost"]:not([class*="forumPostControls"])
-):hover {
-  background: var(--background-modifier-hover) !important;
-  border-color: color-mix(in srgb, var(--item-accent) 35%, transparent) !important;
-}
-
-/* Mention highlight */
+/* Mention highlight in timeline */
 div[class*="mentioned"],
 li[class*="mentioned"] {
-  background: var(--background-mentioned) !important;
-  box-shadow: none !important;
-  border-left: 3px solid var(--item-accent) !important;
-  border-radius: var(--eh-radius-md) !important;
-  position: relative;
-}
-
-div[class*="mentioned"]:hover,
-li[class*="mentioned"]:hover {
-  background: var(--background-mentioned-hover) !important;
+    background: linear-gradient(90deg, rgba(203, 166, 247, 0.12) 0%, transparent 100%) !important;
+    box-shadow: none !important;
+    border-left: 3px solid var(--base0D) !important;
+    border-radius: 8px !important;
+    position: relative;
 }
 
 div[class*="mentioned"]::before,
 li[class*="mentioned"]::before {
-  content: none !important;
+    content: none !important;
 }
 
-/* Replying highlight */
+/* Replying highlight in timeline */
 div[class*="replying"],
 li[class*="replying"] {
-  background: var(--background-mentioned) !important;
-  box-shadow: none !important;
-  border-left: 3px solid var(--item-unread) !important;
-  border-radius: var(--eh-radius-md) !important;
-  position: relative;
-}
-
-div[class*="replying"]:hover,
-li[class*="replying"]:hover {
-  background: var(--background-mentioned-hover) !important;
+    background: linear-gradient(90deg, rgba(193, 143, 177, 0.12) 0%, transparent 100%) !important;
+    box-shadow: none !important;
+    border-left: 3px solid var(--base0F) !important;
+    border-radius: 8px !important;
+    position: relative;
 }
 
 div[class*="replying"]::before,
 li[class*="replying"]::before {
-  content: none !important;
-}
-
-/* Message hover rounding */
-[id^="chat-messages-"] [class*="messageListItem"]:hover,
-[id^="chat-messages-"] [class*="messageListItem"]:hover > [class*="message"],
-[id^="chat-messages-"] [class*="messageListItem"]:hover [class*="contents"] {
-  background: var(--background-modifier-hover) !important;
-  border-radius: var(--eh-radius-md) !important;
-}
-
-/* Unread indicators and badges */
-div[class*="unreadBar"],
-span[class*="unreadBar"],
-div[class*="unreadPill"],
-span[class*="unreadPill"],
-div[class*="numberBadge"],
-span[class*="numberBadge"],
-div[class*="textBadge"],
-span[class*="textBadge"],
-div[class*="unread"][class*="unreadImportant"] {
-  background-color: var(--item-unread) !important;
-  color: var(--item-surface-1) !important;
-}
-
-/* New messages bar — partial module names survive Discord hash rotations. */
-[class*="messagesWrapper"] > [class*="newMessagesBar"][class*="barBase"],
-[class*="messagesWrapper"] [class*="newMessagesBar"][class*="barBase"] {
-  background: color-mix(in srgb, var(--item-surface-0) 90%, var(--item-unread) 10%) !important;
-  border: 1px solid color-mix(in srgb, var(--item-unread) 35%, transparent) !important;
-  color: var(--item-text) !important;
-  border-radius: 999px !important;
-  padding: 6px 12px !important;
-  height: auto !important;
-  min-height: 28px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.06em !important;
-  text-transform: uppercase !important;
-  box-shadow: none !important;
-}
-
-div#---new-messages-bar[class*="divider"] {
-  --divider-color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-}
-
-div#---new-messages-bar[class*="divider"][class*="hasContent"] {
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      color-mix(in srgb, var(--item-unread) 35%, transparent) 20%,
-      color-mix(in srgb, var(--item-unread) 35%, transparent) 70%,
-      transparent 84%,
-      transparent 100%
-    ) !important;
-  border-radius: var(--eh-radius-lg) !important;
-  padding: 4px 54px 4px 10px !important;
-  margin: 14px 0 6px 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  position: relative !important;
-}
-
-div#---new-messages-bar[class*="divider"][class*="isUnread"] {
-  --divider-color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-}
-
-div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="content"] {
-  background: color-mix(in srgb, var(--item-surface-1) 82%, var(--item-unread) 18%) !important;
-  border: 1px solid color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-  color: var(--item-unread) !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
-  font-weight: 600 !important;
-  padding: 4px 10px !important;
-  border-radius: 999px !important;
-  box-shadow: none !important;
-}
-
-div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPill"] {
-  background-image: linear-gradient(
-    120deg,
-    color-mix(in srgb, var(--item-mention-glow-1) 45%, var(--item-surface-1)) 0%,
-    color-mix(in srgb, var(--item-mention-glow-2) 40%, var(--item-surface-1)) 50%,
-    color-mix(in srgb, var(--item-mention-glow-3) 35%, var(--item-surface-1)) 100%
-  ) !important;
-  color: var(--item-mention-text) !important;
-  border: 1px solid color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-  border-radius: 999px !important;
-  padding: 0 8px !important;
-  height: 16px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  font-size: 10px !important;
-  transform: translateY(1px) !important;
-  box-shadow: none !important;
-}
-
-div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPillCapStroke"] {
-  stroke: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-}
-
-div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPillCap"],
-div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPillCap"] path {
-  fill: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-  color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-  stroke: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-}
-
-div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPillCap"],
-div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPillCap"] * {
-  display: none !important;
-}
-
-/* Unread mentions footer pill */
-div[class*="unreadMentionsIndicatorBottom"] > div {
-  background: color-mix(in srgb, var(--item-surface-1) 82%, var(--item-unread) 18%) !important;
-  color: var(--item-unread) !important;
-  border: 1px solid color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-}
-
-/* Jump to present / new messages pill */
-button[class*="jumpToPresentBar"],
-div[class*="jumpToPresentBar"] {
-  background: color-mix(in srgb, var(--item-surface-1) 82%, var(--item-unread) 18%) !important;
-  border-color: color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-  color: var(--item-unread) !important;
+    content: none !important;
 }
 
 /* Inline @mention pills */
@@ -667,60 +684,125 @@ div[class*="jumpToPresentBar"] {
   [id^="chat-messages-"]
   :is([class*="messageContent"], [class*="markup"])
   [class*="mention"] {
-  background-image: linear-gradient(
-    120deg,
-    color-mix(in srgb, var(--item-mention-glow-1) 45%, var(--item-surface-1)) 0%,
-    color-mix(in srgb, var(--item-mention-glow-2) 40%, var(--item-surface-1)) 50%,
-    color-mix(in srgb, var(--item-mention-glow-3) 35%, var(--item-surface-1)) 100%
-  ) !important;
-  color: var(--item-mention-text) !important;
-  border: 1px solid color-mix(in srgb, var(--item-unread) 55%, transparent) !important;
-  box-shadow: none !important;
-  border-radius: 999px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  line-height: 1.4 !important;
-  padding: 0.12em 0.55em !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.3px !important;
-  vertical-align: baseline !important;
-  text-shadow: none !important;
+    background-image: linear-gradient(
+        120deg,
+        rgba(191, 167, 219, 0.25) 0%,
+        rgba(193, 143, 177, 0.25) 50%,
+        rgba(223, 184, 255, 0.25) 100%
+    ) !important;
+    color: var(--base0D) !important;
+    border: 1px solid rgba(193, 143, 177, 0.45) !important;
+    box-shadow: none !important;
+    border-radius: 999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    line-height: 1.4 !important;
+    padding: 0.12em 0.55em !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.25px !important;
+    vertical-align: baseline !important;
 }
 
 :is(.theme-dark, .theme-darker, .theme-midnight, .visual-refresh)
   [id^="chat-messages-"]
   :is([class*="messageContent"], [class*="markup"])
   [class*="mention"]:hover {
-  background-image: linear-gradient(
-    120deg,
-    color-mix(in srgb, var(--item-mention-glow-1) 55%, var(--item-surface-1)) 0%,
-    color-mix(in srgb, var(--item-mention-glow-2) 50%, var(--item-surface-1)) 50%,
-    color-mix(in srgb, var(--item-mention-glow-3) 45%, var(--item-surface-1)) 100%
-  ) !important;
-  border-color: color-mix(in srgb, var(--item-unread) 75%, transparent) !important;
-  box-shadow: none !important;
+    background-image: linear-gradient(
+        120deg,
+        rgba(191, 167, 219, 0.4) 0%,
+        rgba(193, 143, 177, 0.4) 50%,
+        rgba(223, 184, 255, 0.4) 100%
+    ) !important;
+    border-color: var(--base0F) !important;
+    color: var(--base07) !important;
 }
 
-/* Thread/voice active indicators — scoped to voice/activity rows. */
-[class*="voiceUser"] span[class*="live"],
-[class*="voiceUser"] span[class*="live"] span,
-div[class*="activity"] span[class*="dot"] {
-  background-color: var(--item-positive) !important;
-  color: var(--item-text-inverse) !important;
+/* Unread indicators and badges */
+div[class*="unreadBar"],
+span[class*="unreadBar"],
+div[class*="unreadPill"],
+span[class*="unreadPill"],
+div[class*="unread"][class*="unreadImportant"] {
+    background-color: var(--base0F) !important;
+    color: var(--base-crust) !important;
 }
 
-/* Voice and stream routes: neutralize decorative chrome without painting over
- * shared video, participant tiles, controls, or identity surfaces. */
-:is(.callContainer_cb9592, .callContainer__722ff, [class*="callContainer"]) {
-  --bg-overlay-1: color-mix(in srgb, var(--item-surface-0) 28%, transparent);
-  --bg-overlay-2: color-mix(in srgb, var(--item-surface-0) 36%, transparent);
-  --bg-overlay-3: color-mix(in srgb, var(--item-surface-0) 44%, transparent);
+/* New messages bar */
+[class*="messagesWrapper"] > [class*="newMessagesBar"][class*="barBase"],
+[class*="messagesWrapper"] [class*="newMessagesBar"][class*="barBase"] {
+    background: var(--base00) !important;
+    border: 1px solid rgba(193, 143, 177, 0.5) !important;
+    color: var(--base07) !important;
+    border-radius: 999px !important;
+    padding: 6px 14px !important;
+    height: auto !important;
+    min-height: 28px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
 }
 
-:is(.callContainer_cb9592, .callContainer__722ff, [class*="callContainer"])
-  :is(.gradientContainer_bfe55a, [class*="gradientContainer"]) {
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
+div#---new-messages-bar[class*="divider"] {
+    --divider-color: rgba(193, 143, 177, 0.55) !important;
+}
+
+div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="content"] {
+    background: var(--base02) !important;
+    border: 1px solid rgba(193, 143, 177, 0.55) !important;
+    color: var(--base0F) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    font-weight: 600 !important;
+    padding: 4px 12px !important;
+    border-radius: 999px !important;
+}
+
+div#---new-messages-bar[class*="divider"][class*="isUnread"] [class*="unreadPill"] {
+    background-image: linear-gradient(120deg, #BFA7DB, #C18FB1) !important;
+    color: var(--base-crust) !important;
+    border: 1px solid rgba(193, 143, 177, 0.55) !important;
+    border-radius: 999px !important;
+    padding: 0 8px !important;
+    height: 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+}
+
+/* Unread mentions footer pill */
+div[class*="unreadMentionsIndicatorBottom"] > div {
+    background: var(--base02) !important;
+    color: var(--base0F) !important;
+    border: 1px solid rgba(193, 143, 177, 0.55) !important;
+}
+
+/* Jump to present pill */
+button[class*="jumpToPresentBar"],
+div[class*="jumpToPresentBar"] {
+    background: var(--base02) !important;
+    border: 1px solid rgba(193, 143, 177, 0.5) !important;
+    color: var(--base0F) !important;
+    border-radius: 999px !important;
+}
+
+/* Channel text area focus glow */
+[class*="channelTextArea"] [class*="scrollableContainer"] {
+    background: var(--base02) !important;
+    border: 1px solid var(--border-faint) !important;
+    border-radius: 12px !important;
+}
+
+[class*="channelTextArea"]:focus-within {
+    border-color: var(--base0D) !important;
+    border-radius: 12px !important;
+}
+
+[class*="channelTextArea"]:focus-within [class*="scrollableContainer"] {
+    border-color: var(--base0D) !important;
 }
